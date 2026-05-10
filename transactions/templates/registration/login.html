@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Login | Finanças{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center">
+    <div class="card auth-card shadow-sm w-100 p-4 bg-white rounded">
+        <h2 class="text-center mb-4">Entrar</h2>
+        
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="mb-3">
+                    <label class="form-label">{{ field.label }}</label>
+                    {{ field.errors }}
+                    <input type="{{ field.field.widget.input_type }}" 
+                           name="{{ field.html_name }}" 
+                           class="form-control" 
+                           placeholder="Digite seu {{ field.label|lower }}">
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary w-100 mt-2">Acessar Sistema</button>
+        </form>
+
+        <hr>
+        <p class="text-center mb-0">Não tem conta? <a href="{% url 'register' %}">Cadastre-se</a></p>
+    </div>
+</div>
+{% endblock %}
